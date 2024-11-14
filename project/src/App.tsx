@@ -1,9 +1,7 @@
-import { fetchMenu } from "./services/fetchMenu";
+import MenuFetch from "./components/MenuFetch";
 
 function App() {
-  console.log(fetchMenu());
-
-  return <></>;
+  return <MenuFetch />;
 }
 
 export default App;
