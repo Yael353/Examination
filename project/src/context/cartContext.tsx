@@ -1,6 +1,7 @@
 // CartContext.tsx
 import React, { createContext, useContext, useState } from "react";
 import { MenuItem } from "../types/types"; // Typ som kan innehålla id, name, price osv.
+import { idFetch } from "../services/idFetch";
 
 // Skapa en typ för CartContext
 type CartContextType = {
@@ -9,6 +10,9 @@ type CartContextType = {
   decreaseQuantity: (id: number) => void;
   totalAmount: () => number;
   increaseQuantity: (id: number) => void;
+  placeOrder: () => Promise<
+    { id: string; eta: string; timestamp: string } | { error: string }
+  >;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -55,23 +59,45 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const decreaseQuantity = (id: number) => {
-    setCartItems(
-      (prevItems) =>
-        prevItems
-          .map((item) =>
-            item.id === id
-              ? {
-                  ...item,
-                  quantity: item.quantity - 1,
-                  total: item.total - item.price, // Minska total när kvantitet minskas
-                }
-              : item
-          )
-          .filter((item) => item.quantity > 0) // Ta bort artiklar med 0 kvantitet
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+                total: item.total - item.price,
+              }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
     );
   };
   const totalAmount = () => {
     return cartItems.reduce((total, item) => total + (item.total || 0), 0);
+  };
+
+  const placeOrder = async (): Promise<
+    { id: string; eta: string; timestamp: string } | { error: string }
+  > => {
+    if (cartItems.length > 0) {
+      const itemIds = cartItems.flatMap((item) =>
+        Array(item.quantity).fill(item.id)
+      );
+      console.log("itemids:", itemIds);
+      const result = await idFetch(itemIds);
+      if ("error" in result) {
+        console.log("something went wrong with the order", result);
+        return result;
+      } else {
+        console.log("order placed successfully!");
+        setCartItems([]);
+        return { id: result.id, eta: result.eta, timestamp: result.timestamp };
+      }
+    } else {
+      console.log("empty cart = no order!");
+      return { error: "Cart is empty" };
+    }
   };
 
   return (
@@ -82,6 +108,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         increaseQuantity,
         totalAmount,
         decreaseQuantity,
+        placeOrder,
       }}
     >
       {children}

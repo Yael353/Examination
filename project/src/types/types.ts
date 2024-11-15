@@ -24,6 +24,6 @@ export type CartItemProps = {
   total: number;
   quantity: number;
   price: number;
-  addToCart: (item: MenuItem) => void; // Uppdaterad från `(id: number) => void`
+  addToCart: (item: MenuItem) => void;
   removeFromCart: (id: number) => void;
 };

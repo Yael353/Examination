@@ -74,3 +74,10 @@ Uppfyllt och genomfört uppgiftens samtliga krav ( givna i kravspec ).
 **Väl Godkänt**
 
 Utöver G-krav, även har en fungerande kvitto-vy med i sin applikation ( se figma mockup ).
+
+nycklar:
+
+VITE_API_KEY = yum-7BTxHCyHhzIME5TI
+
+id: "guvl",
+name: "yael2"
