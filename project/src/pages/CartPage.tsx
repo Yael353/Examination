@@ -34,7 +34,7 @@ const CartPage = () => {
 
   return (
     <>
-      <div className="bg-[#EEEEEE] min-h-screen h-auto w-[430px] px-4 flex flex-col relative">
+      <div className="bg-[#EEEEEE] min-h-screen h-auto w-[432px] px-4 flex flex-col relative">
         <section className="relative flex justify-end pt-[17px] rounded-[4px]">
           <div className="h-[64px] w-[64px] flex items-center justify-center">
             <img className="text-clay" src="/cart.svg" />

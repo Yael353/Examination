@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart/*",
-    element: <CartPage />
+    element: <CartPage />,
   },
 ]);
 createRoot(document.getElementById("root")!).render(

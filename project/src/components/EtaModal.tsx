@@ -4,7 +4,7 @@ import box from "../../../assets/box.png";
 const EtaModal = ({ id, eta }: { id: string; eta: number }) => {
   return (
     <>
-      <section className="fixed top-0 left-0  z-50 bg-[#605858] w-[430px] min-h-[942px] h-auto  font-fira-sans pb-4">
+      <section className="fixed top-0 left-0  z-50 bg-[#605858] w-[432px] min-h-[942px] h-auto  font-fira-sans pb-4">
         <div className="pt-[97px]">
           <img src={box} alt="loggo" />
         </div>

@@ -36,7 +36,7 @@ const MenuFetch: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#489078] min-h-[932px] h-auto w-[430px] pb-4">
+    <div className="bg-[#489078] min-h-[932px] h-auto w-[432px] pb-4">
       <div className="flex items-end justify-end p-4 relative">
         <Link
           to={"/cart"}
